@@ -1,0 +1,107 @@
+
+// Variables----------------------
+$colorbg: rgb(245, 245, 245);
+$padingTittle: 15px;
+$widthH1: 500px;
+$colorbgList: blue;
+$fontSizeBtn: 23px;
+$fuenteTitulo: Helvetica;
+//FIN Variables----------------------
+
+// Mixin------------------------------
+@mixin fontStyle($color,$fontSize){
+    font-size: $fontSize;
+    background-color: $color; 
+    padding: $padingTittle;
+    width: $widthH1;
+}
+
+//FIN Mixin------------------------------
+
+// includes con variables incluidas----
+body{
+    background-color: $colorbg;
+}
+
+header{
+    color: $colorbgList;
+}
+
+h1{
+    font-family: $fuenteTitulo;
+    color: $colorbg;
+    // include-1
+    @include fontStyle(red, 40px);
+}
+
+p{
+    width: $widthH1 + 20px;
+    @include fontStyle(blue, 20px);
+    // include-2
+    color: $colorbg;
+}
+//FIN includes con variables incluidas----
+
+// Anidación---------------------------
+
+ul{
+   list-style: none;
+   padding: 0;
+   margin: 60px 0; 
+
+    li{
+        display: inline-block;
+    
+        a{
+            text-decoration: none;
+            color: white;
+            padding: 20px;
+            background-color: $colorbgList;
+            font-size: $fontSizeBtn ;
+            &:hover{
+            //anidación-1 con selector 
+                color: #000000;
+            }
+            &:active{
+            //anidación-2 con selector 
+                color: red;
+            }
+        }
+   }
+}
+
+.container{
+    // width: 600px;
+    margin: 0 auto;
+
+    section{
+            float: left;
+            width: 200px / 600px * 100%;
+// operación-1------------------------------
+            height: 400px;
+            background-color: darkkhaki;
+
+        #main span {
+ 
+            width: 97%;
+            padding: $padingTittle;
+            
+          
+            .redbox {
+                    background-color: #ff0000;
+                    color: #000000;
+            }
+        }
+    }
+}
+
+//FIN Anidación---------------------------
+
+
+aside{
+    float: left;
+    width: 400px / 600px * 100%;
+// operación-2------------------------------
+    height: 400px;
+    background-color: darkturquoise;
+}
