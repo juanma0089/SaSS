@@ -16,6 +16,9 @@ $fuenteTitulo: Helvetica;
     width: $widthH1;
 }
 
+@mixin margin{
+    margin-left: 20px;
+}
 //FIN Mixin------------------------------
 
 // includes con variables incluidas----
@@ -72,7 +75,7 @@ ul{
 
 .container{
     // width: 600px;
-    margin: 0 auto;
+    @include margin();
 
     section{
             float: left;

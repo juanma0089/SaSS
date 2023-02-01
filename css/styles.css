@@ -47,7 +47,7 @@ ul li a:active {
 }
 
 .container {
-  margin: 0 auto;
+  margin-left: 20px;
 }
 .container section {
   float: left;
