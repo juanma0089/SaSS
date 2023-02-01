@@ -1,14 +1,23 @@
 
-// Variables----------------------
+//?Variables----------------------
+// * 7 variables realizadas
 $colorbg: rgb(245, 245, 245);
 $padingTittle: 15px;
 $widthH1: 500px;
 $colorbgList: blue;
 $fontSizeBtn: 23px;
 $fuenteTitulo: Helvetica;
-//FIN Variables----------------------
+$base-color: rgb(102, 0, 0);
+//?FIN Variables----------------------
 
-// Mixin------------------------------
+//?Mixin------------------------------
+// * 6 mixin realizados
+@mixin boxshadow() {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 10px, rgba(251, 10, 10, 0.529) 0px 2px 36px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
+
 @mixin fontStyle($color,$fontSize){
     font-size: $fontSize;
     background-color: $color; 
@@ -17,11 +26,43 @@ $fuenteTitulo: Helvetica;
 }
 
 @mixin margin{
-    margin-left: 20px;
-}
-//FIN Mixin------------------------------
+    margin-left: 10px;
 
-// includes con variables incluidas----
+    
+}
+
+@mixin gradient($color1, $color2) {
+    background: radial-gradient(circle, $color1, $color2);
+  }
+
+@mixin parametros-triangulo{
+    width: 0; 
+    height: 0; 
+    border-left: 100px solid #f0ad4e;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+}
+
+@mixin parametros-circulo{
+    width: 100px;
+    height: 100px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+//?FIN Mixin------------------------------
+
+//?funciones-----------------------------
+// * 2 funciones realizadas
+@function encoger($size) {
+    @return ($size / 2);
+  }
+
+@function aumentar($size) {
+    @return ($size * 2);
+  }
+
+//?FIN funciones------------------------- 
 body{
     background-color: $colorbg;
 }
@@ -33,20 +74,21 @@ header{
 h1{
     font-family: $fuenteTitulo;
     color: $colorbg;
-    // include-1
     @include fontStyle(red, 40px);
+    //!mixin
 }
 
 p{
     width: $widthH1 + 20px;
     @include fontStyle(blue, 20px);
-    // include-2
+    //!mixin
     color: $colorbg;
 }
-//FIN includes con variables incluidas----
 
-// Anidación---------------------------
 
+//?Anidación---------------------------
+// * 3 anidaciones realizadas + 2 selectores + 2 operaciones
+//! anidación 1
 ul{
    list-style: none;
    padding: 0;
@@ -62,25 +104,25 @@ ul{
             background-color: $colorbgList;
             font-size: $fontSizeBtn ;
             &:hover{
-            //anidación-1 con selector 
+            //!anidación-1 con selector 
                 color: #000000;
             }
             &:active{
-            //anidación-2 con selector 
+            //!anidación-2 con selector 
                 color: red;
             }
         }
    }
 }
-
+//! anidación 2
 .container{
-    // width: 600px;
     @include margin();
-
+    @include boxshadow();
+    //!mixin
     section{
             float: left;
             width: 200px / 600px * 100%;
-// operación-1------------------------------
+//! operación-1------------------------------
             height: 400px;
             background-color: darkkhaki;
 
@@ -97,14 +139,65 @@ ul{
         }
     }
 }
+//! anidación 3
+.figuras{
+    padding-top: 20px;
+    display: inline-block;
+    margin-left: 50px;
+    align-items: center;
+    .triangulo{
+        @include parametros-triangulo();
+        //!mixin
+    }
+    .circulo{
+        @include parametros-circulo();
+        @include gradient(blue,pink );
+        //!mixin
+    }
+  
+    .circulo2{
+        margin-top: 20px;
+        width: encoger(100px);
+        //!función1
+        height: encoger(100px);
+        //!función1
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        @include gradient(rgb(0, 255, 13),pink );
+        //!mixin
+    }
 
-//FIN Anidación---------------------------
+    .circulo3{
+        margin-top: 20px;
+        width: aumentar(100px);
+        //!función2
+        height: aumentar(100px);
+        //!función2
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        @include gradient(rgb(0, 255, 13),pink );
+        //!mixin
+    }
+}
+
+//?FIN Anidación---------------------------
+
+//? bucle-----------------------------------
+// *1 bucle realizado (mira en la lista)
+
+@for $i from 1 through 3 {
+  ul:nth-child(3n + #{$i}) {
+    background-color: lighten($base-color, $i * 5%);
+  }
+}
 
 
 aside{
     float: left;
     width: 400px / 600px * 100%;
-// operación-2------------------------------
+//! operación-2------------------------------
     height: 400px;
     background-color: darkturquoise;
 }
